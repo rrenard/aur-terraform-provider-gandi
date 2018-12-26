@@ -17,14 +17,14 @@ prepare() {
     mv -f "$pkgname-$pkgver" "$srcdir/src/$_gourl/$pkgname"
     msg2 "Fetching dependencies"
     cd "$srcdir/src/$_gourl/$pkgname"
-    GOPATH="$srcdir" go get
+    GOPATH="$srcdir" GOBIN="$srcdir/bin" go get
 }
 
 
 build() {
     msg2 "Build program"
     cd "$srcdir/src/$_gourl/$pkgname"
-    GOPATH="$srcdir" PATH="$srcdir/bin:$PATH" go build
+    GOPATH="$srcdir" GOBIN="$srcdir/bin" PATH="$srcdir/bin:$PATH" go build
 }
 
 
