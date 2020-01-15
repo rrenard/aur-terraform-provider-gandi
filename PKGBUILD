@@ -1,5 +1,5 @@
 pkgname=terraform-provider-gandi
-pkgver=1.0.0
+pkgver=1.0.1
 pkgrel=1
 pkgdesc="Terraform Gandi provider"
 url="https://github.com/tiramiseb/terraform-provider-gandi"
@@ -9,12 +9,13 @@ makedepends=("go" "git")
 _gourl="github.com/tiramiseb"
 depends=('terraform')
 source=("https://github.com/tiramiseb/${pkgname}/archive/v${pkgver}.tar.gz")
-sha256sums=('2e0edf5d9d77a2c964e943863b250ef6ad333bb1030989aa46eab09b7ee18100')
+sha256sums=('6b4f15ac0ef2a67d648c8a760ef763626f1915cd24bc78dd7cc85c7b0b3fd45c')
 
 prepare() {
     mkdir -p "$srcdir/src/$_gourl"
     rm -rf "${srcdir}/src/$_gourl/$pkgname"
     mv -f "$pkgname-$pkgver" "$srcdir/src/$_gourl/$pkgname"
+    cp ../go.mod ../go.sum "$srcdir/src/$_gourl/$pkgname/"
     msg2 "Fetching dependencies"
     cd "$srcdir/src/$_gourl/$pkgname"
     GOPATH="$srcdir" GOBIN="$srcdir/bin" go get
